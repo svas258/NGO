@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block body %}
+  <div class='row'>
+    <div class='col-5 mx-auto'>
+      <h3>Add NGO Details</h3><hr>
+      <form method='post' action='{{url_for("add_ngo")}}'>
+        <div class='form-group'>
+          <label>NGO_NAME:</label>
+          <input type='text' name='NGO_NAME' required class='form-control'>
+        </div>
+        <div class='form-group'>
+          <label>Contact:&emsp;&emsp;&ensp;</label>
+          <input type='text' name='contact_No' required class='form-control'>
+        </div>
+        <input type='submit' value='Submit' class='btn btn-primary'>
+      </form>
+    
+    </div>
+  </div>
+{% endblock %}
