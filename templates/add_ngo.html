@@ -7,10 +7,16 @@
   {% endif %}
 {% endwith %}
 {% block body %}
+  {% if session.name %}
+        You are Register {{ session.name }} <a href="/logout">logout</a>.
+    {% else %}
+          You are not Register. <a href="/login">login</a>.
+    {% endif %}
   <div class='row'>
     <div class='col-5 mx-auto'>
       <h3>Add NGO Details</h3><hr>
-      <form method='post' action='{{url_for("add_ngo")}}'>
+      <form method='post' action='{{url_for("add_ngo")}}' role='form'>
+	<input type='hidden' name='csrf_token' value ='{{ csrf_token()}}'/>
         <div class='form-group'>
           <label>NGO_NAME</label>
           <input type='text' name='NGO_NAME' required class='form-control'>
