@@ -58,10 +58,14 @@ def login():
                 cur=conn.cursor()
                 cur.execute("SELECT user FROM users where  user=?",(name,))
                 u=cur.fetchone()
+                #p=cur.execute("SELECT password FROM users where password=?",(password,)).fetchone()
                 if u :
                     p=cur.execute("SELECT password FROM users where password=?",(password,))
                     pss=p.fetchone()
                     if pss:
+                     posts = conn.execute('SELECT * FROM posts').fetchall()
+                     conn.close()
+                     #return render_template('index.html', datas=posts)
                      return redirect(url_for("index"))
                     else:
                         error = 'Invalid Credentials. Please try again.'   

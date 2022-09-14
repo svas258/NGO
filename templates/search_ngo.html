@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block body %}
+  {% if session.name %}
+        You are Register {{ session.name }} <a href="/logout">logout</a>.
+    {% else %}
+          You are not Register. <a href="/login">login</a>.
+    {% endif %}
+  <div class='row'>
+    <div class='col-5 mx-auto'>
+      <h3>Search</h3><hr>
+      <form class="form-inline ml-auto" method='post'>
+	      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>      
+        <div class='form-group'>
+          <input class="form-control mr-sm-2" type='search' placeholder="search" aria-label="Search" name='search' id="search">
+	  <button class="btn btn-outline-success my-2 my-sm-0"  type='submit' value='Submit'>Search</button>
+      </form>
+    </div>
+   {% if usr | length != 0 %}
+   <table class='table table-bordered'>
+       <thead >
+        <link href="{{ url_for('static', filename='main.css') }}" rel="stylesheet" type="text/css" >
+           <th>ID</th>
+           <th>NGO_NAME</th>
+           <th>contact_No</th>
+           <th>Email_ID</th>
+
+       </thead>
+       <tbody>
+           {% for u in usr %}
+           <tr>
+               <td>{{u.id}}</td>
+               <td>{{u.NGO_NAME}}</td>
+               <td>{{u.contact_No}}</td>
+               <td>{{u.email}}</td>
+               <td><a href='{{url_for("edit_ngo",id=u.id)}}' class="btn btn-primary">Edit</a></td>
+               <td><a href='{{url_for("delete_user",id=u.id)}}' class='btn btn-danger' onclick='return confirm("Are You Sure")'>Delete</a></td>
+           </tr>
+         {%endfor%}
+       </tbody>
+   </table>
+   {% else %}
+   <div id="demo">No search results.</div>
+   {% endif %}
+{% endblock %}
